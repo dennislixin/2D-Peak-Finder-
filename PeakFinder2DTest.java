@@ -8,7 +8,13 @@ public class PeakFinder2DTest{
     test(1, 1);
     test(1, 10);
     test(10, 1);
-    test(13, 15);
+    test(5, 5);
+    test(5, 5);
+    test(5, 5);
+    test(5, 5);
+    test(5, 5);
+    test(5, 5);
+    
   }
 
   public static void test(int row, int column){
@@ -33,19 +39,19 @@ public class PeakFinder2DTest{
     return findPeakProcess(doubleArray, 0, doubleArray.length - 1);
   }
 
-  private static <E extends Comparable<? super E>> E findPeakProcess(E[][] doubleArray, int left, int right){
-    if(left <= right){
-      int mid = (right - left) / 2 + left;
+  private static <E extends Comparable<? super E>> E findPeakProcess(E[][] doubleArray, int up, int down){
+    if(up <= down){
+      int mid = (down - up) / 2 + up;
       int maxIndex = findMax(doubleArray[mid]);
-
       E midItem = doubleArray[mid][maxIndex];
-      int newRight = mid - 1;
-      int newLeft = mid + 1;
 
-      if(newRight >= left && midItem.compareTo(doubleArray[newRight][maxIndex]) < 0)
-        return findPeakProcess(doubleArray, left, newRight);
-      else if(newLeft <= right && midItem.compareTo(doubleArray[newLeft][maxIndex]) < 0)
-        return findPeakProcess(doubleArray, newLeft, right);
+      int newDown = mid - 1;
+      int newUp = mid + 1;
+
+      if(newDown >= up && midItem.compareTo(doubleArray[newDown][maxIndex]) < 0)
+        return findPeakProcess(doubleArray, up, newDown);
+      else if(newUp <= down && midItem.compareTo(doubleArray[newUp][maxIndex]) < 0)
+        return findPeakProcess(doubleArray, newUp, down);
       else
         return midItem;
     }
