@@ -14,7 +14,7 @@ public class PeakFinder2DTest{
     test(5, 5);
     test(5, 5);
     test(5, 5);
-    
+
   }
 
   public static void test(int row, int column){
@@ -36,11 +36,10 @@ public class PeakFinder2DTest{
     if(!isValidInput(doubleArray))
       return null;
 
-    return findPeakProcess(doubleArray, 0, doubleArray.length - 1);
+    return findPeakUtil(doubleArray, 0, doubleArray.length - 1);
   }
 
-  private static <E extends Comparable<? super E>> E findPeakProcess(E[][] doubleArray, int up, int down){
-    if(up <= down){
+  private static <E extends Comparable<? super E>> E findPeakUtil(E[][] doubleArray, int up, int down){
       int mid = (down - up) / 2 + up;
       int maxIndex = findMax(doubleArray[mid]);
       E midItem = doubleArray[mid][maxIndex];
@@ -49,14 +48,11 @@ public class PeakFinder2DTest{
       int newUp = mid + 1;
 
       if(newDown >= up && midItem.compareTo(doubleArray[newDown][maxIndex]) < 0)
-        return findPeakProcess(doubleArray, up, newDown);
+        return findPeakUtil(doubleArray, up, newDown);
       else if(newUp <= down && midItem.compareTo(doubleArray[newUp][maxIndex]) < 0)
-        return findPeakProcess(doubleArray, newUp, down);
+        return findPeakUtil(doubleArray, newUp, down);
       else
         return midItem;
-    }
-
-    throw new RuntimeException("you should not see me");
   }
 
   private static <E extends Comparable<? super E>> int findMax(E[] array){
